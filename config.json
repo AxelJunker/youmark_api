@@ -1,0 +1,14 @@
+{
+  "development": {
+    "port": 4000,
+    "mongo": {
+      "uri": "mongodb://localhost/youmark",
+      "db": "youmark"
+    }
+  },
+  "production": {
+    "mongo": {
+      "uri": "mongodb+srv://admin:${DB_PW}@production-qlgdj.mongodb.net/test?retryWrites=true"
+    }
+  }
+}
