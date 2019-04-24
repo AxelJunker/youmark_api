@@ -3,6 +3,7 @@ const log4js = require('log4js');
 let logger;
 
 if (process.env.NODE_ENV === 'production') {
+  console.log('IN PRODUCTION');
   log4js.configure({
     appenders: {
       aws: {

@@ -3,6 +3,8 @@ const async = require('async');
 const Marker = require('../models/marker');
 const logger = require('../inc/logger');
 
+logger.info('starting');
+
 const router = express.Router();
 
 const v = 'v1';
