@@ -1,6 +1,7 @@
 const express = require('express');
 const async = require('async');
 const Marker = require('../models/marker');
+const logger = require('../inc/logger');
 
 const router = express.Router();
 
@@ -20,10 +21,10 @@ router.get(`/api/${v}/marker/:video_id/:user_id`, (req, res) => {
         res.send(markers);
       });
     } else if (err) {
-      console.trace(err);
+      logger.error(err);
       res.status(500).send({ err: err.message });
     } else {
-      console.trace('No markers returned from Marker.find');
+      logger.error('No markers returned from Marker.find');
       res.status(500).send({ err: 'No markers returned from Marker.find' });
     }
   });
@@ -37,10 +38,10 @@ router.post(`/api/${v}/marker`, (req, res) => {
       if (!err && savedMarker) {
         res.send(savedMarker);
       } else if (err) {
-        console.trace(err);
+        logger.error(err);
         res.status(500).send({ err: err.message });
       } else {
-        console.trace('No marker returned from marker.save');
+        logger.error('No marker returned from marker.save');
         res.status(500).send({ err: 'No marker returned from marker.save' });
       }
     });
@@ -59,10 +60,10 @@ router.delete(`/api/${v}/marker/:_id/:user_id`, (req, res) => {
           if (!delErr && delMarker) {
             res.send(delMarker);
           } else if (delErr) {
-            console.trace(delErr);
+            logger.error(delErr);
             res.status(500).send({ err: delErr.message });
           } else {
-            console.trace('No marker returned from marker.remove');
+            logger.error('No marker returned from marker.remove');
             res.status(500).send({ err: 'No marker returned from marker.remove' });
           }
         });
@@ -70,6 +71,7 @@ router.delete(`/api/${v}/marker/:_id/:user_id`, (req, res) => {
         res.status(400).send({ err: 'Wrong user_id' });
       }
     } else if (err) {
+      logger.error(err);
       res.status(500).send({ err: err.message });
     } else {
       res.status(400).send({ err: 'No marker found with id: ' + _id });
@@ -88,7 +90,7 @@ router.patch(`/api/${v}/marker/report/:_id`, (req, res) => {
       if (!err && marker) {
         res.send(marker);
       } else if (err) {
-        console.trace(err);
+        logger.error(err);
         res.status(500).send({ err: err.message });
       } else {
         res.status(400).send({ err: 'No marker with id: ' + _id });

@@ -22,26 +22,8 @@ const mongooseOpts = { useNewUrlParser: true, useCreateIndex: true };
 const mongoUri = template(config.mongo.uri, { DB_PW: process.env.DB_PW });
 mongoose.connect(mongoUri, mongooseOpts);
 
-const logger = (req, res, next) => {
-  console.log(req.method + ' ' + req.path);
-  if (req.body) {
-    console.log('Body:');
-    console.log(req.body);
-  }
-  if (Object.keys(req.query).length) {
-    console.log('Query:');
-    console.log(req.query);
-  }
-  if (Object.keys(req.params).length) {
-    console.log('Params:');
-    console.log(req.params);
-  }
-  next();
-};
-
 const markerRoutes = require('./routes/marker.js');
 
-app.use(logger);
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(cors());
@@ -55,14 +37,10 @@ server.listen(port, () => {
 
 io.on('connection', (socket) => {
   socket.on('markerAdd', (data) => {
-    console.log('socket markerAdd');
-    console.log(data);
     delete data.user_id;
     socket.broadcast.emit('markerAdd', data);
   });
   socket.on('markerRemove', (data) => {
-    console.log('socket markerRemove');
-    console.log(data);
     socket.broadcast.emit('markerRemove', data);
   });
 });
