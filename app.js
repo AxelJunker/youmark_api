@@ -32,7 +32,7 @@ app.use('/', markerRoutes);
 const { port } = config;
 
 server.listen(port, () => {
-  console.log(`Express server listening on port ${port}`);
+  logger.info(`Express server listening on port ${port}`);
 });
 
 io.on('connection', (socket) => {
