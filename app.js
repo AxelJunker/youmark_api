@@ -6,11 +6,13 @@ const cors = require('cors');
 const template = require('es6-template-strings');
 const dotenv = require('dotenv');
 
-dotenv.config();
-
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+
+const logger = require('./inc/logger');
+
+dotenv.config();
 const configFile = require('./config.json');
 
 const defaultConfig = configFile.development;
