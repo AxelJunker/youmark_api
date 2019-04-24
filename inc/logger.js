@@ -3,6 +3,8 @@ const log4js = require('log4js');
 let logger;
 
 if (process.env.NODE_ENV === 'production') {
+  console.log(process.env.AWS_ID);
+  console.log(process.env.AWS_SECRET);
   log4js.configure({
     appenders: {
       aws: {
