@@ -15,7 +15,6 @@
     "dotenv": "^7.0.0",
     "es6-template-strings": "^2.0.1",
     "express": "^4.16.4",
-    "express-restify-mongoose": "^5.0.0",
     "log4js": "^4.1.0",
     "log4js-cloudwatch-appender": "^1.1.0",
     "method-override": "^3.0.0",
